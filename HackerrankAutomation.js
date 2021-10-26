@@ -38,11 +38,38 @@ async function run(){
    
    //Actual login - password
    await page.waitForSelector("input[name='password']");
-   await page.type("input[name='password']", configJSO.userid, {delay: 30});
+   await page.type("input[name='password']", configJSO.password, {delay: 30});
 
    //clicking the final login
    await page.waitForSelector("button[data-analytics='LoginPassword']");
-   await page.click("button[data-analytics='LoginPassword']"); 
+   await page.click("button[data-analytics='LoginPassword']");
+   
+   //Clicking on compete
+   await page.waitForSelector("a[data-analytics='NavBarContests']");
+   await page.click("a[data-analytics='NavBarContests']");
+   
+   //manage contest clicking
+   await page.waitForSelector("a[href='/administration/contests/']");
+   await page.click("a[href='/administration/contests/']");
+
+   //click on first contest
+   await page.waitForSelector("p.mmT");
+   await page.click("p.mmT");
+
+   await page.waitFor(3000);
+
+   //moderator clicking
+   await page.waitForSelector("li[data-tab='moderators']");
+   await page.click("li[data-tab='moderators']");
+
+   //Typing in moderator for first contest
+   await page.waitForSelector("input#moderator");
+   await page.type("input#moderator", configJSO.moderator, {delay: 30});
+   
+   //saving the first moderator added!
+   //await page.keyboard.press("Enter");
+
+
 }
 
 run();
