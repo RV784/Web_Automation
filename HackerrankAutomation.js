@@ -65,17 +65,15 @@ async function run(){
        return urls;
    });
 
-   console.log(curls);
-   
-  
-
-
-
+   handleAPage(curls);
 
 }
 
-async function saveModerator(tab, href, moderator){    //New tab, link for the tab, name of the moderator
-
+async function handleAPage(curlsOfAPage){    //New tab, link for the tab, name of the moderator
+     
 }
 
 run();
+
+
+//Rajat Verma
