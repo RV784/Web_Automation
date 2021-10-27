@@ -1,4 +1,4 @@
-// node HackerrankAutomation.js --url=https://www.hackerrank.com/ --config=config.json
+// node HackerrankAutomation.js --url=https://www.hackerrank.com --config=config.json
 let minimist = require("minimist");
 let puppeteer = require("puppeteer");
 let fs = require("fs");
@@ -52,24 +52,28 @@ async function run(){
    await page.waitForSelector("a[href='/administration/contests/']");
    await page.click("a[href='/administration/contests/']");
 
-   //click on first contest
-   await page.waitForSelector("p.mmT");
-   await page.click("p.mmT");
+   //find all urls of the current page
+   await page.waitForSelector("a.backbone.block-center");
+   let curls = await page.$$eval("a.backbone.block-center", function(atags){
+       let urls = [];
+       
+       for(let i = 0 ; i < atags.length ; i++){
+           let url = atags[i].getAttribute('href');
+           urls.push(url);
+       }
 
-   await page.waitFor(3000);
+       return urls;
+   });
 
-   //moderator clicking
-   await page.waitForSelector("li[data-tab='moderators']");
-   await page.click("li[data-tab='moderators']");
-
-   //Typing in moderator for first contest
-   await page.waitForSelector("input#moderator");
-   await page.type("input#moderator", configJSO.moderator, {delay: 30});
-   
-   //saving the first moderator added!
-   //await page.keyboard.press("Enter");
-
+   handleAPage(curls);
 
 }
 
+async function handleAPage(curlsOfAPage){    //New tab, link for the tab, name of the moderator
+     
+}
+
 run();
+
+
+//Rajat Verma
